@@ -1,0 +1,88 @@
+/* 공통 스타일 */
+body.admin {
+  background-color: #1e1e2f; /* 부드러운 어두운 배경 */
+  font-family: 'Arial', sans-serif;
+  color: #cfcfcf; /* 연한 회색 텍스트 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 헤더 */
+.admin-header {
+  background-color: #2a2a3d; /* 어두운 헤더 배경 */
+  color: #d6d6d6; /* 밝은 회색 텍스트 */
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* 부드러운 그림자 */
+}
+
+.admin-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* 네비게이션 */
+.admin-nav-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-nav-list a {
+  color: #8ab4f8; /* 차분한 블루 계열 링크 */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.admin-nav-list a:hover {
+  color: #a3d1ff; /* 살짝 밝아지는 블루 강조 */
+  text-decoration: underline;
+}
+
+/* 카드 */
+.admin-post-card {
+  background-color: #29293d; /* 어두운 회색 카드 배경 */
+  padding: 1.5rem;
+  border: 1px solid #44475a; /* 부드러운 테두리 */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 은은한 그림자 */
+  color: #cfcfcf; /* 연한 회색 텍스트 */
+}
+
+/* 버튼 */
+.admin-read-more {
+  color: #8ab4f8; /* 차분한 블루 텍스트 */
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.admin-read-more:hover {
+  color: #a3d1ff; /* 밝은 블루 강조 */
+  text-decoration: underline;
+}
+
+/* 사이드바 */
+.admin-sidebar {
+  background-color: #29293d; /* 어두운 회색 배경 */
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #44475a; /* 부드러운 테두리 */
+  color: #cfcfcf; /* 연한 회색 텍스트 */
+}
+
+/* 푸터 */
+.admin-footer {
+  background-color: #2a2a3d; /* 어두운 푸터 배경 */
+  color: #d6d6d6; /* 밝은 회색 텍스트 */
+  text-align: center;
+  padding: 1rem 0;
+  border-top: 1px solid #44475a; /* 부드러운 테두리 */
+}
+
+.bg-charcoal {
+  background-color: #2a2a3d;
+  color: #d6d6d6; /* 밝은 회색 텍스트 */
+  border: 1px solid #44475a; /* 부드러운 테두리 */
+}
