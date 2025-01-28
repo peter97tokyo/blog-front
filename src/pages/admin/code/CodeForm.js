@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import axios from '../../../api/admin/axios';
+import axios from '../../../components/admin/axios';
 
 function CodeForm() {
     const { search } = useLocation();
     const params = new URLSearchParams(search);
-    const parentId = params.get('parentId') === null ? 0 : params.get('parentId');
+    const parent = params.get('parent') === null ? 0 : Number(params.get('parent'));
     const groupYn = params.get('groupYn') === null ? 'Y' : params.get('groupYn');
     const [codeKey, setCodeKey] = useState('');
     const [codeValue, setCodeValue] = useState('');
@@ -15,7 +15,7 @@ function CodeForm() {
     const summit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/codes', {parentId, groupYn, codeKey, codeValue, description});
+            const response = await axios.post(`/codes?parent=${parent}`, {groupYn, codeKey, codeValue, description});
             if(response.data.status === "result.success"){
                 alert('저장 성공하였습니다.')
             }else {
@@ -26,7 +26,7 @@ function CodeForm() {
         }
     };
     return (
-        <main className="col-md-10 mb-4">
+        <main className="col-md-8 mb-4">
             <div className="admin-post-card">
                 <h2>CODE FORM</h2>
                 <hr></hr>

@@ -16,7 +16,7 @@ function Header(){
                         <li><Link to="/">Contents</Link></li>
                     </ul>
                 </nav>
-                <h1 className="logo">Blog For Peter In Tokyo</h1>
+                <h1 className="logo">BLOG</h1>
             </div>
         </header>
 

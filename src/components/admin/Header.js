@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from '../../api/admin/axios'
+import axios from './axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/components/admin/global.css';
@@ -39,9 +39,9 @@ function Header(){
                 <div className="container d-flex justify-content-between align-items-center">
                 <nav>
                     <ul className="admin-nav-list">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/contents">Contents</Link></li>
+                    <li><Link to="/admin">Home</Link></li>
+                    <li><Link to="/admin/code">Code</Link></li>
+                    <li></li>
                     </ul>
                 </nav>
                 <h1 className="admin-logo">ADMIN</h1>
