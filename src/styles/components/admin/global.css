@@ -86,3 +86,7 @@ body.admin {
   color: #d6d6d6; /* 밝은 회색 텍스트 */
   border: 1px solid #44475a; /* 부드러운 테두리 */
 }
+
+.width-full {
+  width: 100%;
+}

@@ -11,8 +11,10 @@ function CodeList() {
     const navigate = useNavigate();
 
     // 그룹 추가 시 호출
-    const handleSave = (parent, groupYn) => {
-        navigate(`/admin/code/form?parent=${parent}&groupYn=${groupYn}`);
+    const handleSave = (parent, groupYn, id) => {
+        const queryParams = new URLSearchParams({ parent, groupYn }); 
+        if (id) queryParams.append('id', id); 
+        navigate(`/admin/code/form?${queryParams.toString()}`);
     };
 
     useEffect(() => {
@@ -34,65 +36,58 @@ function CodeList() {
     }, []);
 
     // 클릭 시 하위 코드 토글
-    const handleExpandToggle = (id) => {
+    const handleExpandToggle = (id, parent, groupYn) => {
         setExpanded((prev) => ({
             ...prev,
             [id]: !prev[id], // 클릭한 코드의 열림/닫힘 상태 토글
         }));
+        const queryParams = new URLSearchParams({ parent, groupYn }); 
+        if (id) queryParams.append('id', id); 
+        navigate(`/admin/code/form?${queryParams.toString()}`);
     };
 
     return (
         <aside className="col-md-4 mb-4">
             <div className="admin-sidebar mb-4">
-                <div className="d-flex justify-content-between align-items-center">
-                    <h3>CODE</h3>
-                    <button 
-                        type="button" 
-                        className="btn btn-light" 
-                        onClick={() => handleSave(parent, groupYn)}
-                    >
-                        그룹코드추가
-                    </button>
-                </div>
-                <ul style={{ listStyleType: 'none', padding: 0 }}>
+                <h3><b>CODE</b></h3>
+                <ul className="list-unstyled">
                     {codes.length > 0 ? (
                         codes.map((code, index) => {
                             const isExpanded = expanded[code.id];
 
                             return (
-                                <li key={code.id} style={{ marginBottom: '10px' }}>
-                                    <span
-                                        onClick={() => handleExpandToggle(code.id)}
-                                        style={{
-                                            cursor: 'pointer',
-                                            fontWeight: 'bold',
-                                            display: 'inline-block',
-                                            marginRight: '10px',
-                                        }}
-                                    >
-                                        {code.groupYn === 'Y' && (isExpanded ? '-' : '+')}
+                                <li key={code.id} className="mb-2">
+                                    <span className="d-flex justify-content-between align-items-center">
+                                        <span
+                                            onClick={() => handleExpandToggle(code.id, 'Y', code.id)}
+                                            className={`fw-semibold ${isExpanded ? '' : 'text-decoration-underline'}`}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                        <b>
+                                            {isExpanded ? '-' : '+'} {code.codeValue}
+                                        </b>
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className="btn btn-primary btn-sm ms-2"
+                                            onClick={() => handleSave(code.id, 'Y', null)}
+                                        >
+                                            추가
+                                        </button>
                                     </span>
-                                    <span>{code.codeValue}</span>
-                                    <button
-                                        type="button"
-                                        className="btn btn-sm btn-light ml-2"
-                                        onClick={() => handleSave(code.id, 'Y')}
-                                        style={{ marginLeft: '10px' }}
-                                    >
-                                        하위 그룹 추가
-                                    </button>
+                                    
                                     {/* 하위 코드가 있고 열려 있는 경우 */}
                                     {isExpanded && code.children && code.children.length > 0 && (
-                                        <ul
-                                            style={{
-                                                marginLeft: '30px',
-                                                listStyleType: 'decimal',
-                                                padding: 0,
-                                            }}
-                                        >
+                                        <ul className="ms-4 list-unstyled">
                                             {code.children.map((child) => (
-                                                <li key={child.id}>
-                                                    <span>{child.codeValue}</span>
+                                                <li key={child.id} className="mb-1">
+                                                    <span
+                                                        onClick={() => handleSave(code.id, 'Y', child.id)}
+                                                        
+                                                        style={{ cursor: 'pointer' }}
+                                                    >
+                                                        {child.codeValue}
+                                                    </span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -104,6 +99,13 @@ function CodeList() {
                         <li>코드가 없습니다.</li>
                     )}
                 </ul>
+                <button 
+                    type="button" 
+                    className="btn btn-primary width-full" 
+                    onClick={() => handleSave(parent, groupYn, null)}
+                >
+                    그룹코드추가
+                </button>
             </div>
         </aside>
     );
