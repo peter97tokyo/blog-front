@@ -14,18 +14,38 @@ const Login = () => {
 
       e.preventDefault();
       try {
-          const response = await axios.post('/users/login', { username, password });
-    
-          const { token } = response.data;
-          localStorage.setItem('jwt', token);
-          if(response.data.status === "user.login"){
-            navigate('/admin');    
-          }else{
-            alert('로그인 실패')
-          }
+        const response = await axios.post('/users/login', { username, password });
+        const statusCode = response.status; 
+        const { token } = response.data;
+        localStorage.setItem('jwt', token);
+        navigate('/admin');
       } catch (error) {
-        setStatus(error.response?.data?.status || '로그인 실패');
+        if (error.response) {
+          const statusCode = error.response.status;
+          switch (statusCode) {
+            case 400:
+              alert('잘못된 요청입니다. 입력을 확인해주세요.');
+              break;
+            case 401:
+              alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+              break;
+            case 403:
+              alert('접근 권한이 없습니다.');
+              break;
+            case 500:
+              alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+              break;
+            default:
+              alert(`알 수 없는 오류가 발생했습니다. (Error Code: ${statusCode})`);
+          }
+        } 
+        else if (error.request) {
+          alert('서버 응답이 없습니다. 네트워크 상태를 확인해주세요.');
+        } else {
+          alert(`오류가 발생했습니다: ${error.message}`);
+        }
       }
+      
   };
   return (
     <div className="container d-flex align-items-center justify-content-center min-vh-100">

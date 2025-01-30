@@ -18,17 +18,26 @@ function Header(){
                         Authorization: `Bearer ${token}`, // 토큰 포함
                     },
                 });
-                if(response.data === "jwt.nothing" || response.data === "jwt.user"){
-                    alert('권한이 없습니다.')
-                    navigate('/admin/login');    
-                }
             } catch (error) {
-                alert('권한이 없습니다.')
-                navigate('/admin/login'); // '/login' 경로로 리디렉션
+                if (error.response) {
+                    const statusCode = error.response.status;
+                    if(statusCode >= 400){
+                        alert('권한이 없습니다.')
+                        navigate('/admin/login');    
+                    } else {
+                        alert('알 수 없는 오류가 발생했습니다.');    
+                        navigate('/admin/login');
+                    }
+                }else if (error.request) {
+                    alert('서버 응답이 없습니다. 네트워크 상태를 확인해주세요.');
+                    navigate('/admin/login');
+                } else {
+                    alert('알 수 없는 오류가 발생했습니다');    
+                    navigate('/admin/login');
+                }
 
             }
         };
-
         fetchAdminData();
     }, []);
     return(
