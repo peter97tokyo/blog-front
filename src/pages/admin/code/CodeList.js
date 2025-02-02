@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../../../components/admin/axios';
+import axios from '../../../components/admin/Axios';
 
 function CodeList() {
     const [parent, setParent] = useState(0);
@@ -36,7 +36,7 @@ function CodeList() {
     }, []);
 
     // 클릭 시 하위 코드 토글
-    const handleExpandToggle = (id, parent, groupYn) => {
+    const handleExpandToggle = (parent, groupYn, id) => {
         setExpanded((prev) => ({
             ...prev,
             [id]: !prev[id], // 클릭한 코드의 열림/닫힘 상태 토글
@@ -63,9 +63,9 @@ function CodeList() {
                                             className={`fw-semibold ${isExpanded ? '' : 'text-decoration-underline'}`}
                                             style={{ cursor: 'pointer' }}
                                         >
-                                        <b>
-                                            {isExpanded ? '-' : '+'} {code.codeValue}
-                                        </b>
+                                            <b>
+                                                {isExpanded ? '-' : '+'} {code.codeValue}
+                                            </b>
                                         </span>
                                         <button
                                             type="button"
@@ -82,8 +82,7 @@ function CodeList() {
                                             {code.children.map((child) => (
                                                 <li key={child.id} className="mb-1">
                                                     <span
-                                                        onClick={() => handleSave(code.id, 'Y', child.id)}
-                                                        
+                                                        onClick={() => handleSave(code.id, 'N', child.id)}
                                                         style={{ cursor: 'pointer' }}
                                                     >
                                                         {child.codeValue}

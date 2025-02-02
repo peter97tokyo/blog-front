@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axios from '../../components/admin/axios';
+import axios from '../../components/admin/Axios';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -15,10 +15,12 @@ const Login = () => {
       e.preventDefault();
       try {
         const response = await axios.post('/users/login', { username, password });
-        const statusCode = response.status; 
         const { token } = response.data;
-        localStorage.setItem('jwt', token);
-        navigate('/admin');
+        const statusCode = response.status; 
+        if(statusCode === 200){
+          localStorage.setItem('jwt', token);
+          navigate('/admin');
+        }
       } catch (error) {
         if (error.response) {
           const statusCode = error.response.status;

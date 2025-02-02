@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from './axios'
+import axios from './Axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/components/admin/global.css';
@@ -50,7 +50,7 @@ function Header(){
                     <ul className="admin-nav-list">
                     <li><Link to="/admin">Home</Link></li>
                     <li><Link to="/admin/code">Code</Link></li>
-                    <li></li>
+                    <li><Link to="/admin/boardConfig">BoardConfig</Link></li>   
                     </ul>
                 </nav>
                 <h1 className="admin-logo">ADMIN</h1>

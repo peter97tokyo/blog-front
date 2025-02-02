@@ -90,3 +90,11 @@ body.admin {
 .width-full {
   width: 100%;
 }
+
+.textarea-length-center {
+  display: flex;              /* 플렉스박스 활성화 */
+  align-items: center;        /* 세로 중앙 정렬 */
+  height: 100px;              /* 높이 설정 */
+  resize: none;               /* 크기 조절 비활성화 (옵션) */
+
+}

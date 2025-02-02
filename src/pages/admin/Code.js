@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 
 import CodeList from './code/CodeList'
 import CodeForm from './code/CodeForm'
-import CodeDetail from './code/CodeDetail'
+
 
 function Code() {
   return (
@@ -15,7 +15,6 @@ function Code() {
                 <Routes>
                     <Route path="" element={<CodeForm/>} />
                     <Route path="form" element={<CodeForm/>} />
-                    <Route path="detail" element={<CodeDetail/>} />
                 </Routes>
             </section>
       </main>

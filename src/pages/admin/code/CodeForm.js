@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from '../../../components/admin/axios';
+import axios from '../../../components/admin/Axios';
 
 function CodeForm() {
     const { search } = useLocation();
@@ -56,16 +56,32 @@ function CodeForm() {
     const summit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`/codes?parent=${code.parent}`, code);
-            if (response.data.status === "result.success") {
+            const response = await axios.post(`/codes?parent=${parent}`, code);
+            const statusCode = response.status; 
+            if(statusCode === 200){
                 alert('저장 성공하였습니다.');
                 window.location.reload(); // 새로고침
-            } else {
-                alert('저장 실패하였습니다.');
             }
         } catch (error) {
-            alert('저장 실패하였습니다.');
-        }
+            if (error.response) {
+              const statusCode = error.response.status;
+              switch (statusCode) {
+                case 400:
+                  alert('잘못된 요청입니다. 입력을 확인해주세요.');
+                  break;
+                case 500:
+                  alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                  break;
+                default:
+                  alert(`알 수 없는 오류가 발생했습니다. (Error Code: ${statusCode})`);
+              }
+            } 
+            else if (error.request) {
+              alert('서버 응답이 없습니다. 네트워크 상태를 확인해주세요.');
+            } else {
+              alert(`오류가 발생했습니다: ${error.message}`);
+            }
+          }
     };
 
     const handleDelete = async () => {
