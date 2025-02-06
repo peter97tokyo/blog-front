@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 
 import BoardConfigList from './boardConfig/BoardConfigList'
 import BoardConfigForm from './boardConfig/BoardConfigForm'
-import BoardConfigDetail from './boardConfig/BoardConfigDetail'
 
 function Code() {
   return (
@@ -12,7 +11,7 @@ function Code() {
                 <Route path="" element={<BoardConfigList/>} />
                 <Route path="form" element={<BoardConfigForm/>} />
                 <Route path="form/:id" element={<BoardConfigForm />} />
-                <Route path="detail" element={<BoardConfigDetail/>} />
+                
             </Routes>
       </main>
   )

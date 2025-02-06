@@ -14,10 +14,9 @@ function CodeForm() {
         codeValue: '',
         description: '',
         groupYn: groupYn,
-        parent: parent,
+        parent: parent ? { id: parent } : null,  // parent가 없으면 null로 설정
     });
-
-    const navigate = useNavigate();
+    
 
     useEffect(() => {
         const fetchCodes = async () => {
@@ -55,8 +54,18 @@ function CodeForm() {
 
     const summit = async (e) => {
         e.preventDefault();
+    
+        // parent가 없으면 필드에서 제거
+        const requestData = { ...code };
+        if (!code.parent || !code.parent.id) {
+            delete requestData.parent;
+        }
+        
+        console.log("전송할 데이터:", JSON.stringify(requestData, null, 2)); // 디버깅용
+
+
         try {
-            const response = await axios.post(`/codes?parent=${parent}`, code);
+            const response = await axios.post(`/codes`, requestData);
             const statusCode = response.status; 
             if(statusCode === 200){
                 alert('저장 성공하였습니다.');

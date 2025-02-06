@@ -6,7 +6,6 @@ import axios from '../../components/admin/Axios';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState('');
   const navigate = useNavigate();
   
   
@@ -33,6 +32,9 @@ const Login = () => {
               break;
             case 403:
               alert('접근 권한이 없습니다.');
+              break;
+            case 404:
+              alert('존재하지 않는 계정입니다.');
               break;
             case 500:
               alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
