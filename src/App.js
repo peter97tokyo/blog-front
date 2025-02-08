@@ -10,6 +10,7 @@ import Home from './components/user/Home'
 import AdminLogin from './pages/admin/Login'
 import AdminHome from './components/admin/Home'
 import Code from './pages/admin/Code'
+import Board from './pages/admin/Board'
 import BoardConfig from './pages/admin/BoardConfig'
 
 
@@ -44,6 +45,7 @@ function Rayout() {
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin" element={<AdminHome />} />
       <Route path="/admin/code/*" element={<Code />} />
+      <Route path="/admin/board/*" element={<Board />} />
       <Route path="/admin/boardConfig/*" element={<BoardConfig />} />
       
     </Routes>

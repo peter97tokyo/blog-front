@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
 import BoardConfigList from './boardConfig/BoardConfigList'
 import BoardConfigForm from './boardConfig/BoardConfigForm'

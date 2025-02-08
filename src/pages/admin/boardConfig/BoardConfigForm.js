@@ -113,7 +113,6 @@ function BoardConfigForm() {
                         name="blockedExtensions" 
                         value={boardConfigs.blockedExtensions} 
                         onChange={handleInputChange} 
-                        placeholder="차단 확장자를 입력해주세요."
                     ></textarea>
                 </div>
                 <div className="text-warning mb-3">

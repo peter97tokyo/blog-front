@@ -25,7 +25,7 @@ function BoardConfigList({ itemsPerPage = 5 }) {
     const totalPages = Math.ceil(configs.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentConfigs = configs.slice(indexOfFirstItem, indexOfLastItem);
+    const currentConfigs = Array.isArray(configs) ? configs.slice(indexOfFirstItem, indexOfLastItem) : [];
 
     // 페이지 이동
     const handleSave = (id) => {

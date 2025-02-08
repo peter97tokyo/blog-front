@@ -50,6 +50,7 @@ function Header(){
                     <ul className="admin-nav-list">
                     <li><Link to="/admin">Home</Link></li>
                     <li><Link to="/admin/code">Code</Link></li>
+                    <li><Link to="/admin/board">Board</Link></li>   
                     <li><Link to="/admin/boardConfig">BoardConfig</Link></li>   
                     </ul>
                 </nav>
