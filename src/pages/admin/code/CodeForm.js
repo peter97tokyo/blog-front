@@ -55,17 +55,23 @@ function CodeForm() {
     const summit = async (e) => {
         e.preventDefault();
     
-        // parent가 없으면 필드에서 제거
-        const requestData = { ...code };
-        if (!code.parent || !code.parent.id) {
-            delete requestData.parent;
-        }
+        const data = {
+            codeKey: code.codeKey,
+            codeValue: code.codeValue,
+            description: code.description,
+            groupYn: code.groupYn,
+        };
         
-        console.log("전송할 데이터:", JSON.stringify(requestData, null, 2)); // 디버깅용
+        if (parent) { // parent가 존재하는 경우에만 포함
+            data.parent = { id: parent };
+        }
 
+        if (id) { 
+            data.id = id;
+        }
 
         try {
-            const response = await axios.post(`/codes`, requestData);
+            const response = await axios.post('/codes', data); // 5초 타임아웃 설정
             const statusCode = response.status; 
             if(statusCode === 200){
                 alert('저장 성공하였습니다.');
