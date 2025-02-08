@@ -13,7 +13,7 @@ function BoardConfigList({ itemsPerPage = 5 }) {
         const fetchConfigs = async () => {
             try {
                 const response = await axios.get('/boardConfigs');
-                setConfigs(response.data);
+                setConfigs(response.data.content);
             } catch (error) {
                 console.error('Error fetching configs:', error);
             }
@@ -25,7 +25,7 @@ function BoardConfigList({ itemsPerPage = 5 }) {
     const totalPages = Math.ceil(configs.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentConfigs = Array.isArray(configs) ? configs.slice(indexOfFirstItem, indexOfLastItem) : [];
+    const currentConfigs = configs.slice(indexOfFirstItem, indexOfLastItem);
 
     // 페이지 이동
     const handleSave = (id) => {
@@ -74,7 +74,7 @@ function BoardConfigList({ itemsPerPage = 5 }) {
 
             {/* 추가/삭제 버튼 */}
             <div className="d-flex justify-content-end mt-3">
-                <button type="button" onClick={handleSave} className="btn btn-success">추가</button>
+                <button type="button" onClick={()=>handleSave()} className="btn btn-success">추가</button>
                 <button type="button" className="btn btn-danger ms-3">삭제</button>
             </div>
         </div>

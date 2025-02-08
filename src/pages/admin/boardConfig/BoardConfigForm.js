@@ -54,6 +54,24 @@ function BoardConfigForm() {
         }
     };
 
+    const handleDelete = async (e) => {
+        if (window.confirm('정말로 삭제하시겠습니까?')) {
+            try {
+                const response = await axios.delete(`/boardConfigs/${id}`);
+                if (response.status === 204) {
+                    alert('삭제가 완료되었습니다.');
+                    navigate('/admin/boardConfig');
+                } else {
+                    alert('삭제 실패하였습니다.');
+                }
+            } catch (error) {
+                console.error('Error deleting code:', error);
+                alert('삭제 중 오류가 발생했습니다.');
+            }
+        }
+
+    };
+
     return (
         <div className="admin-post-card">
             <h2><b>BOARD CONFIG FORM</b></h2>
@@ -68,6 +86,7 @@ function BoardConfigForm() {
                         onChange={handleInputChange} 
                         placeholder="게시판 이름을 입력해주세요." 
                         className="form-control"
+                        required
                     />
                 </div>
                 <div className="input-group mb-3">
@@ -121,6 +140,7 @@ function BoardConfigForm() {
                         onChange={handleInputChange} 
                         placeholder="게시판 카테고리를 입력해주세요." 
                         className="form-control"
+                        required
                     />
                 </div>
                 <div className="text-warning mb-3">
@@ -128,6 +148,8 @@ function BoardConfigForm() {
                 </div>
                 <div className="d-flex justify-content-end">
                     <button type="submit" className="btn btn-success">저장</button>
+                    { id ? <button type="button" className="btn btn-danger ms-3" onClick={() => handleDelete()}>삭제</button> : <></>}
+                    
                     <button type="button" className="btn btn-danger ms-3" onClick={() => navigate('/admin/boardConfig')}>취소</button>
                 </div>
             </form>
