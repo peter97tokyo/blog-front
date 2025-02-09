@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from './Axios'
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/components/admin/global.css';
 
@@ -56,7 +57,8 @@ function Header(){
                 </nav>
                 <h1 className="admin-logo">ADMIN</h1>
                 </div>
-            </header> 
+            </header>
+            
             }
         </>
     )
