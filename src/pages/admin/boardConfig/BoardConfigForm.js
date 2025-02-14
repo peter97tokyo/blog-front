@@ -5,7 +5,8 @@ import axios from '../../../components/admin/Axios';
 function BoardConfigForm() {
     const { id } = useParams();  // URL의 id 값 받기
     const navigate = useNavigate();
-
+    const [codes, setCodes] = useState([]);
+    
     const [boardConfigs, setBoardConfigs] = useState({
         boardName: '',
         isActive: '',
@@ -26,6 +27,14 @@ function BoardConfigForm() {
                 } catch (error) {
                     console.error('Error fetching board config:', error);
                 }
+            }
+
+            try {
+                const response = await axios.get('/codes/children/board');
+                const childrenList = response.data.content || response.data;
+                setCodes(childrenList);
+            } catch (error) {
+                console.error('Error fetching board config:', error);
             }
         };
 
@@ -126,8 +135,9 @@ function BoardConfigForm() {
                         value={boardConfigs.boardType} 
                         onChange={handleInputChange}
                     >
-                        <option value="list">목록</option>
-                        <option value="thumbnail">썸네일</option>
+                        {codes.map((code)=>(
+                            <option value={code.codeValue}>{code.description}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="input-group">
